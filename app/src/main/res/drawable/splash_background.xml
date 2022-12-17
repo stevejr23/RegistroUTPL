@@ -3,12 +3,14 @@
     android:opacity="opaque">
     <item android:drawable="@color/utpl"></item>
 
-    <item
-        android:bottom="160dp"
-        android:left="5dp"
-        android:right="5dp"
-        android:top="160dp">
+    <item>
+        <!--        android:bottom="160dp"-->
+        <!--        android:left="5dp"-->
+        <!--        android:right="5dp"-->
+        <!--        android:top="160dp">-->
 
-        <bitmap android:src="@drawable/utpl"></bitmap>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/utpl"></bitmap>
     </item>
 </layer-list>
