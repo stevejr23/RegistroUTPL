@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnRegistro.setOnClickListener {
-            val saltar: Intent = Intent(this, CrearCuentaActivity::class.java)
+            val saltar: Intent = Intent(this, RegistroActivity::class.java)
             startActivity(saltar)
         }
     }
