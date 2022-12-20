@@ -39,21 +39,22 @@ class CrearCuentaActivity : AppCompatActivity() {
     }
 
     // Cargar imagenes de la galeria
-    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) {
-            // Imagen seleccionada
-            iVFoto.setImageURI(uri)
-        } else {
-            // No imagen
-            Log.i("aris", "Imagen NO Seleccionada")
-        }
+    private val pickMedia =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                // Imagen seleccionada
+                iVFoto.setImageURI(uri)
+            } else {
+                // No imagen
+                Log.i("aris", "Imagen NO Seleccionada")
+            }
 
-    }
+        }
 
     //Evento que procesa el resultado de la cámara y envía la vista previa de la foto al ImageViewFoto
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
+            if (result.resultCode == RESULT_OK) {
                 val intent = result.data
                 val imageBitmap = intent?.extras?.get("data") as Bitmap
                 val imageView = findViewById<ImageView>(R.id.iVFoto)
