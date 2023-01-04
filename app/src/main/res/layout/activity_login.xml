@@ -69,27 +69,26 @@
 
     <Button
         android:id="@+id/btnIniciar"
-        android:layout_width="311dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="@color/botonutpl"
         android:text="Iniciar Sesion"
         android:textColor="@color/utpl"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <Button
         android:id="@+id/btnLoginUTPL"
-        android:layout_width="309dp"
+        android:layout_width="300dp"
         android:layout_height="43dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="@color/utpl"
         android:text="Iniciar con Cuenta UTPL"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIniciar" />
 

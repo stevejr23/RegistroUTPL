@@ -10,7 +10,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val btnIniciar = findViewById<Button>(R.id.btnIniciar)
 
         btnIniciar.setOnClickListener {
             val saltar: Intent = Intent(this, LoginActivity::class.java)
