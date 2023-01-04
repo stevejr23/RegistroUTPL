@@ -87,6 +87,7 @@
         android:layout_marginTop="28dp"
         android:backgroundTint="@color/utpl"
         android:text="Iniciar con Cuenta UTPL"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.44"
         app:layout_constraintStart_toStartOf="parent"

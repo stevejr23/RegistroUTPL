@@ -16,13 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_crear_cuenta.*
+import kotlinx.android.synthetic.main.activity_login.*
 
-enum class ProviderType {
-    BASIC, // Registro Basico
-    GOOGLE, // Registro con credenciales de google
-    FACEBOOK  // Registro con credenciales de google
-
-}
 
 class CrearCuentaActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
@@ -31,21 +26,20 @@ class CrearCuentaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_cuenta)
-        val btnCrearCuenta = findViewById<Button>(R.id.btnEnviar)
+
+        val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
         val bundle: Bundle? = intent.extras
         val email: String? = bundle?.getString("email")
         val provider: String? = bundle?.getString("provider")
 
+        // Crear cuenta
         setup(email ?: "", provider ?: "")
 
-        btnCrearCuenta.setOnClickListener {
-            val saltar: Intent = Intent(this, LoginActivity::class.java)
-            startActivity(saltar)
-        }
-
+        // Cargar una foto
         tvCargaFoto.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+        // Realizar una foto
         tvTomarFoto.setOnClickListener {
             startForResult.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
         }
@@ -62,7 +56,6 @@ class CrearCuentaActivity : AppCompatActivity() {
                 // No imagen
                 Log.i("aris", "Imagen NO Seleccionada")
             }
-
         }
 
     //Evento que procesa el resultado de la cámara y envía la vista previa de la foto al ImageViewFoto
@@ -82,11 +75,7 @@ class CrearCuentaActivity : AppCompatActivity() {
         tv_correo.text = email
         tv_provider.text = provider
 
-        btn_salir.setOnClickListener() {
-            FirebaseAuth.getInstance().signOut()
-            onBackPressed()
-        }
-        btnEnviar.setOnClickListener() {
+        btnGuardarDatos.setOnClickListener() {
             db.collection("users").document(email).set(
                 hashMapOf(
                     "provider" to provider,
@@ -95,6 +84,11 @@ class CrearCuentaActivity : AppCompatActivity() {
                 )
             )
         }
+        btnCrearCuenta.setOnClickListener {
+            val saltar: Intent = Intent(this, LoginActivity::class.java)
+            startActivity(saltar)
+        }
+
     }
 }
 
