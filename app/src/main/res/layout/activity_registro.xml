@@ -7,126 +7,146 @@
     tools:context=".RegistroActivity">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-52dp"
-        tools:layout_editor_absoluteY="247dp">
+    <EditText
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:id="@+id/etUsuario"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/ic_user"
+        android:ems="10"
+        android:hint="Nombre de Usuario"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/utpl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <EditText
+
+        android:id="@+id/etPhone"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_movil"
+        android:ems="10"
+        android:hint="Número de celular"
+        android:inputType="phone"
+        android:textColorHint="@color/utpl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etContraseña" />
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iVFoto">
+
+        <TextView
+
+            android:id="@+id/tvCargaFoto"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Cargar Foto"
+            android:textAlignment="center"
+            android:textColor="@color/utpl" />
 
-            <ImageView
-                android:id="@+id/iVFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/avatar" />
+        <TextView
+            android:id="@+id/tvTomarFoto"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Tomar Foto"
+            android:textAlignment="center"
+            android:textColor="@color/utpl" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+    </LinearLayout>
 
-                <TextView
+    <EditText
 
-                    android:id="@+id/tvCargaFoto"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:text="Cargar Foto"
-                    android:textAlignment="center"
-                    android:textColor="@color/utpl" />
+        android:id="@+id/etCorreo"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_correo"
+        android:ems="10"
+        android:hint="Correo Electrónico"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/utpl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etUsuario" />
 
-                <TextView
-                    android:id="@+id/tvTomarFoto"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:text="Tomar Foto"
-                    android:textAlignment="center"
-                    android:textColor="@color/utpl" />
-            </LinearLayout>
+    <ImageView
+        android:id="@+id/iVFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/avatar" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_gravity="center"
-                android:text="Registro de Usuario"
-                android:textColor="@color/utpl"
-                android:textSize="24sp" />
+    <EditText
 
-            <EditText
+        android:id="@+id/etContraseña"
+        android:layout_width="329dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_clave"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:textColorHint="@color/utpl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCorreo" />
 
-                android:id="@+id/etUsuario"
-                android:layout_width="328dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_user"
-                android:ems="10"
-                android:hint="Nombre de Usuario"
-                android:inputType="textPersonName"
-                android:textColorHint="@color/utpl" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Registro de Usuario"
+        android:textColor="@color/utpl"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+    <Button
 
-                android:id="@+id/etCorreo"
-                android:layout_width="328dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:drawableStart="@drawable/ic_correo"
-                android:ems="10"
-                android:hint="Correo Electrónico"
-                android:inputType="textEmailAddress"
-                android:textColorHint="@color/utpl" />
-
-            <EditText
-
-                android:id="@+id/etContraseña"
-                android:layout_width="329dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:drawableStart="@drawable/ic_clave"
-                android:ems="10"
-                android:hint="Contraseña"
-                android:inputType="textPassword"
-                android:textColorHint="@color/utpl" />
-
-            <EditText
-
-                android:id="@+id/etPhone"
-                android:layout_width="328dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:drawableStart="@drawable/ic_movil"
-                android:ems="10"
-                android:hint="Número de celular"
-                android:inputType="phone"
-                android:textColorHint="@color/utpl" />
-
-            <Button
-
-                android:id="@+id/btnEnviar"
-                android:layout_width="296dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/botonutpl"
-                android:text="Registrarse"
-                android:textColor="@color/utpl" />
-
-        </LinearLayout>
-    </ScrollView>
+        android:id="@+id/btnEnviar"
+        android:layout_width="296dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/botonutpl"
+        android:text="Registrarse"
+        android:textColor="@color/utpl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
