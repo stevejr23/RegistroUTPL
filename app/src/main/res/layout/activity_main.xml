@@ -21,7 +21,7 @@
 
         <Button
             android:id="@+id/btnRegistro"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="133dp"
@@ -50,7 +50,7 @@
 
         <Button
             android:id="@+id/btnIniciar"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="200dp"
             android:backgroundTint="@color/botonutpl"

@@ -106,7 +106,6 @@ class RegistroActivity : AppCompatActivity() {
             )
         )
         showConfirmation(usuario)
-
     }
 
     // Cargar imagenes de la galeria
