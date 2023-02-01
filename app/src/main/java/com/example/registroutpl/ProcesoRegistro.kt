@@ -3,6 +3,7 @@ package com.example.registroutpl
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,9 +12,12 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_principal.*
 import kotlinx.android.synthetic.main.activity_proceso_registro.*
 import kotlinx.android.synthetic.main.activity_registro.*
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
@@ -56,22 +60,20 @@ class ProcesoRegistro : AppCompatActivity() {
         val fecha = separetedDate[0]
 
         val col = db.collection(email).document(fecha)
-
         if (registrationType == "entrada") {
             col.set(
                 hashMapOf(
                     "entrada" to hora,
                     "salida" to null
                 )
-
             )
         } else {
             col.update(
                 "salida", hora
             )
         }
-
         btn_subir_data.setOnClickListener {
+            subirImagen(email,fecha, hora, registrationType)
             showConfirmation(registrationType, email)
         }
     }
@@ -90,6 +92,23 @@ class ProcesoRegistro : AppCompatActivity() {
             })
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+    private fun subirImagen(email:String,fecha:String, hora:String, registrationType: String) {
+
+        val storage = Firebase.storage
+        var storageRef = storage.reference
+        val rutaImagen = storageRef.child("profiles/${email}/asistant/${fecha}-${hora}-${registrationType}.jpeg")
+
+        val bitmap = (iv_foto_registro2.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        val data = baos.toByteArray()
+
+        var uploadTask = rutaImagen.putBytes(data)
+        uploadTask.addOnFailureListener {
+        }.addOnSuccessListener {
+
+        }
     }
 }
 

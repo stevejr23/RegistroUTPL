@@ -13,12 +13,16 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.common.data.DataHolder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.*
+import com.google.firebase.storage.ktx.storage
+
 import kotlinx.android.synthetic.main.activity_registro.*
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileInputStream
 
 enum class ProviderType {
     BASIC,
@@ -26,7 +30,6 @@ enum class ProviderType {
 
 class RegistroActivity : AppCompatActivity() {
 
-    lateinit var storage: FirebaseFirestore
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +48,6 @@ class RegistroActivity : AppCompatActivity() {
         tvTomarFoto.setOnClickListener {
             startForResult.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
         }
-
-        // Subir imagen
-        //storage = Firebase.storage
     }
 
     private fun setup() {
@@ -60,7 +60,7 @@ class RegistroActivity : AppCompatActivity() {
                         etContraseña.text.toString()
                     ).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            register(it.result?.user?.email ?: "", ProviderType.BASIC.name)
+                            subirImagen(it.result?.user?.email ?: "")
                         } else {
                             showAlert()
                         }
@@ -132,25 +132,22 @@ class RegistroActivity : AppCompatActivity() {
         }
 
     // subir imagen al firebase storage
-    private fun subirImagen() {
+    private fun subirImagen(email:String) {
         val storage = Firebase.storage
         var storageRef = storage.reference
-        val rutaImagen = storageRef.child("registroAvatar/avatar.jpg")
+        val rutaImagen = storageRef.child("profiles/${email}/images/avatar.jpeg")
 
-        // Get the data from an ImageView as bytes
-        tvCargaFoto.isDrawingCacheEnabled = true
-        tvCargaFoto.buildDrawingCache()
-        val bitmap = (tvCargaFoto.drawableState as BitmapDrawable).bitmap
+        val bitmap = (iVFoto.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
         val data = baos.toByteArray()
 
         var uploadTask = rutaImagen.putBytes(data)
         uploadTask.addOnFailureListener {
+            showAlert()
         }.addOnSuccessListener { taskSnapshot ->
-
+            register(email ?: "", ProviderType.BASIC.name)
         }
-
     }
 }
 
