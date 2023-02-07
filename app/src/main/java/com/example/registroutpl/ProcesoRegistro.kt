@@ -28,13 +28,15 @@ class ProcesoRegistro : AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         val email: String? = bundle?.getString("email")
         val type: String? = bundle?.getString("type")
+        val latitud: String? = bundle?.getString("latitud")
+        val longitud: String? = bundle?.getString("longitud")
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_proceso_registro)
 
         btn_tomarfotoRegis.setOnClickListener {
             startForResult.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
-            subirData(email ?: "", type ?: "")
+            subirData(email ?: "", type ?: "", latitud ?: "", longitud ?: "")
         }
 
     }
@@ -51,29 +53,42 @@ class ProcesoRegistro : AppCompatActivity() {
         }
 
 
-    private fun subirData(email: String, registrationType: String) {
+    private fun subirData(
+        email: String,
+        registrationType: String,
+        latitud: String,
+        longitud: String
+    ) {
         val date = Date()
-        val formatter = SimpleDateFormat("E d MMM yyyy-HH:mm:ss",Locale("es", "ES"))
+        val formatter = SimpleDateFormat("E d MMM yyyy-HH:mm:ss", Locale("es", "ES"))
         val current = formatter.format(date)
         val separetedDate = current.split('-')
         val hora = separetedDate[1]
         val fecha = separetedDate[0]
+
+        val ubicacion = hashMapOf<String, String>(
+            "latitud" to latitud,
+            "longitud" to longitud
+        )
 
         val col = db.collection(email).document(fecha)
         if (registrationType == "entrada") {
             col.set(
                 hashMapOf(
                     "entrada" to hora,
-                    "salida" to null
+                    "ubicacionEntrada" to ubicacion,
+                    "salida" to null,
+                    "ubicacionSalida" to null,
                 )
             )
         } else {
             col.update(
-                "salida", hora
-            )
+                "salida", hora,
+                "ubicacionSalida", ubicacion,
+                )
         }
         btn_subir_data.setOnClickListener {
-            subirImagen(email,fecha, hora, registrationType)
+            subirImagen(email, fecha, hora, registrationType)
             showConfirmation(registrationType, email)
         }
     }
@@ -93,11 +108,13 @@ class ProcesoRegistro : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-    private fun subirImagen(email:String,fecha:String, hora:String, registrationType: String) {
+
+    private fun subirImagen(email: String, fecha: String, hora: String, registrationType: String) {
 
         val storage = Firebase.storage
         var storageRef = storage.reference
-        val rutaImagen = storageRef.child("profiles/${email}/asistant/${fecha}-${hora}-${registrationType}.jpeg")
+        val rutaImagen =
+            storageRef.child("profiles/${email}/asistant/${fecha}-${hora}-${registrationType}.jpeg")
 
         val bitmap = (iv_foto_registro2.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
